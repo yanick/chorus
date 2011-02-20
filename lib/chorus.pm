@@ -10,9 +10,7 @@ use File::Slurp qw/ slurp /;
 
 our $VERSION = '0.1';
 
-my $prez = "<div class='slide'>". markdown( scalar slurp 'prez' ) . "</div>";
-my $heads;
-$prez =~ s#(?=<h1>)# $heads++ ? "</div><div class='slide'>" : "" #eg;
+my $prez;
 
 get '/' => sub {
     template 'index' => { 
@@ -21,5 +19,11 @@ get '/' => sub {
         base_url => request->base->opaque,
     };
 };
+
+sub load_presentation {
+    $prez = "<div class='slide'>". markdown( scalar slurp shift ) . "</div>";
+    my $heads;
+    $prez =~ s#(?=<h1>)# $heads++ ? "</div><div class='slide'>" : "" #eg;
+}
 
 true;

@@ -21,6 +21,8 @@ my $token = join '', shuffle 'a'..'z';
 
 $chorus::first_connect = 1;
 
+chorus::load_presentation( pop || die "no presentation file given\n" );
+
 # Web::Hippie routes
 get '/new_listener' => sub {
     request->env->{'hippie.listener'}->subscribe($topic);
