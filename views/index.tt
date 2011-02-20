@@ -1,0 +1,46 @@
+      <html>
+    <head>
+    <script
+src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+    <script>
+    var socket;
+
+    $(function() {
+        // ws_path should be of the form ws://host/_hippie/ws
+        var ws_path = "ws:<% request.base.opaque %>_hippie/ws";
+        socket = new WebSocket(ws_path);
+        socket.onopen = function() {
+            $('#connection-status').text("Connected");
+        };
+        socket.onmessage = function(e) {
+            var data = JSON.parse(e.data);
+            if (data.msg) {
+                var time = Date();
+                $('ul').prepend('<li>' + time + ': ' + data.msg + '</li>');
+            }
+        };
+    });
+
+    function send_msg(message) {
+        socket.send(JSON.stringify({ msg: message }));
+    }
+    </script>
+    </head>
+
+    <body>
+
+    <h1 id="title">Dancer WebSocket Demo</h1>
+    Connection Status:
+    <span id="connection-status"> Disconnected </span>
+
+    <div>
+    <input value="Send Message" type=button onclick="send_msg('hello')"/>
+    <input value="clear" type=button onclick="$('ul').empty()"/>
+    </div>
+
+    <span style="font-weight:bold"> Messages </span>
+    <ul id="list"></ul>
+
+    </body>
+    </html>

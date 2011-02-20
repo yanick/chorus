@@ -1,0 +1,72 @@
+<%args>
+$presentation
+$prez_url => ''
+$base_url
+</%args>
+<html>
+<head>
+        <script type="text/javascript" src="/slippy/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="/slippy/jquery.history.js"></script>
+        <script type="text/javascript" src="/slippy/slippy-0.9.0.js"></script>
+
+        <!-- Slippy structural styles -->
+        <link type="text/css" rel="stylesheet" href="/slippy/slippy-0.9.0.css"/>
+        <!-- Slippy theme -->
+        <link type="text/css" rel="stylesheet" href="/slippy/slippy-pure.css"/>
+
+</head>
+<body>
+<% $presentation %>
+<script>
+/*$('h1').each(function(){
+   $(this).nextUntil('h1').andSelf().wrapAll( $('<div class="slide"/>') ) ;
+});
+$('.slide .slide').each(function(){ $(this).parent().html( $(this).children()) });
+*/
+% if ( $prez_url ) {
+$('.slide:eq(0)').append(
+"<p>join me on <% $prez_url %></p>"
+);
+% } 
+$('.slide').slippy();
+
+var ws_path = "ws:<% $base_url %>_hippie/ws";
+var socket = new WebSocket( ws_path );
+
+var master;
+
+socket.onopen = function(){
+    $('.slide').append( 'Connected!' );
+    send_msg( "connected" );
+};
+
+socket.onmessage = function(e){
+    if ( master ) { return; }  // masters don't listen to ANYBODY!
+
+    var data = JSON.parse(e.data);
+    alert( data.msg + " " + data.master);
+    if ( data.master ) {
+        master = data.master;
+        alert("we're da mastah!");
+    }
+    else if ( data.slide ) {
+        $.fn.slippy_set_slide( data.slide );
+    }
+};
+
+function send_msg(message) {
+    socket.send(JSON.stringify({msg: message}));
+}
+
+$('.slide').bind('setSlide', function() {
+    if ( master ) {
+        socket.send(JSON.stringify({
+            "master": master,
+            "slide": $().slippy_current_slide_index()
+        }));
+    }
+} );
+
+</script>
+</body>
+</html>

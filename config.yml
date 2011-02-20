@@ -1,0 +1,4 @@
+logger: "file"
+appname: "chorus"
+template: 'mason'
+
