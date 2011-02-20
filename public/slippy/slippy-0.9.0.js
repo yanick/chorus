@@ -378,7 +378,7 @@
         }
     };
 
-    $.fn.slippy_set_slide = setSlide;
+    $.fn.slippy_show_slide = showSlide;
 
     $.fn.slippy_current_slide = function() {
         return slides[curSlide];

@@ -14,20 +14,44 @@ $base_url
         <!-- Slippy theme -->
         <link type="text/css" rel="stylesheet" href="/slippy/slippy-pure.css"/>
 
+<style>
+#chorus_terminal .choirboy,.mc { display: none; }
+#chorus_terminal {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    border: 1pt dashed black;
+    width: 20em;
+    padding: 5px;
+}   
+#chorus_title {
+    margin-bottom: 1em;
+}
+</style>
 </head>
+
 <body>
 <% $presentation %>
+
+
+<div id="chorus_terminal">
+<div id="chorus_title"><b>Chorus</b> <span id="chorus_url"><% $prez_url %></span></div>
+
+<div class="choirboy">Joined the chorus
+<div>MC is at slide <span id="mc_slide">unknown</span>
+</div>
+<div>auto-follow: <input id="chorus_autofollow" type="checkbox" checked="checked"
+/></div>
+</div>
+<p class="mc">Lead singer</p>
+</div>
+
 <script>
 /*$('h1').each(function(){
    $(this).nextUntil('h1').andSelf().wrapAll( $('<div class="slide"/>') ) ;
 });
 $('.slide .slide').each(function(){ $(this).parent().html( $(this).children()) });
 */
-% if ( $prez_url ) {
-$('.slide:eq(0)').append(
-"<p>join me on <% $prez_url %></p>"
-);
-% } 
 $('.slide').slippy();
 
 var ws_path = "ws:<% $base_url %>_hippie/ws";
@@ -36,7 +60,6 @@ var socket = new WebSocket( ws_path );
 var master;
 
 socket.onopen = function(){
-    $('.slide').append( 'Connected!' );
     send_msg( "connected" );
 };
 
@@ -44,13 +67,26 @@ socket.onmessage = function(e){
     if ( master ) { return; }  // masters don't listen to ANYBODY!
 
     var data = JSON.parse(e.data);
-    alert( data.msg + " " + data.master);
+    //alert( data.msg + " " + data.master);
+
+    $('#chorus_terminal .choirboy').show();
+
     if ( data.master ) {
         master = data.master;
-        alert("we're da mastah!");
+        $('#chorus_terminal .choirboy').hide();
+        $('#chorus_terminal .mc').show();
+        return;
     }
-    else if ( data.slide ) {
-        $.fn.slippy_set_slide( data.slide );
+
+    if ( data.slide != undefined ) {
+        var s = data.slide+1;
+        $('#mc_slide').html( 
+            "<a href='<% $prez_url %>#" + s +  "'>" + s + "</a>"
+        );
+
+        if ( $('#chorus_autofollow').attr('checked') ) {
+            $.fn.slippy_show_slide( data.slide );
+        }
     }
 };
 
@@ -68,5 +104,6 @@ $('.slide').bind('setSlide', function() {
 } );
 
 </script>
+
 </body>
 </html>
