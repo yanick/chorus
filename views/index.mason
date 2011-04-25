@@ -13,6 +13,7 @@ $base_url
         <link type="text/css" rel="stylesheet" href="/slippy/slippy-0.9.0.css"/>
         <!-- Slippy theme -->
         <link type="text/css" rel="stylesheet" href="/slippy/slippy-pure.css"/>
+        <link type="text/css" rel="stylesheet" href="/my-style.css"/>
 
 <style>
 #chorus_terminal .choirboy,.mc { display: none; }

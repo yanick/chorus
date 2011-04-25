@@ -1,0 +1,7 @@
+pre code {
+    display: block;
+    border-style: dotted;
+    border-width: 1px;
+    margin: 2em;
+    padding: 1em;
+}
