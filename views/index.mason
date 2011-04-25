@@ -2,6 +2,7 @@
 $presentation
 $prez_url => ''
 $base_url
+$aria => 0
 </%args>
 <html>
 <head>
@@ -35,6 +36,7 @@ $base_url
 <% $presentation %>
 
 
+% unless ( $aria ) {
 <div id="chorus_terminal">
 <div id="chorus_title"><b>Chorus</b> <span id="chorus_url"><% $prez_url %></span></div>
 
@@ -46,6 +48,7 @@ $base_url
 </div>
 <p class="mc">Lead singer</p>
 </div>
+% }
 
 <script>
 /*$('h1').each(function(){
@@ -54,6 +57,8 @@ $base_url
 $('.slide .slide').each(function(){ $(this).parent().html( $(this).children()) });
 */
 $('.slide').slippy();
+
+% unless ( $aria ) {
 
 var ws_path = "ws:<% $base_url %>_hippie/ws";
 var socket = new WebSocket( ws_path );
@@ -103,7 +108,7 @@ $('.slide').bind('setSlide', function() {
         }));
     }
 } );
-
+% }
 </script>
 
 </body>
