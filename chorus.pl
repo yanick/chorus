@@ -12,6 +12,8 @@ use Plack::Builder;
 
 use List::Util qw/ shuffle /;
 
+$chorus::presentation_file = shift if @ARGV;
+
 my $bus = AnyMQ->new;
 my $topic = $bus->topic('slides');
 

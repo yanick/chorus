@@ -6,9 +6,12 @@ use Dancer ':syntax';
 #use Dancer::Plugin::WebSocket;
 
 use Text::Markdown qw/ markdown /;
+use HTML::Entities qw/ encode_entities /;
 use File::Slurp qw/ slurp /;
 
 our $VERSION = '0.1';
+
+our $presentation_file;
 
 get '/' => sub {
     template 'index' => { 
@@ -30,10 +33,25 @@ sub presentation {
 }
 
 sub load_presentation {
-    my $prez = "<div class='slide'>". markdown( scalar slurp config->{presentation} ) . "</div>";
+    $presentation_file ||= config->{presentation};
+    
+    my $markdown = groom_markdown( scalar slurp $presentation_file );
+
+    my $prez = "<div class='slide'>". markdown( $markdown ) . "</div>";
     my $heads;
     $prez =~ s#(?=<h1>)# $heads++ ? "</div><div class='slide'>" : "" #eg;
     return $prez;
+}
+
+sub groom_markdown {
+    my $md = shift;
+
+    $md =~ s#^(~~~+)\s*?(\S*)$ (.*?)^\1$ #
+        "<pre lang='$2'>" 
+      . encode_entities($3) 
+      . '</pre>'#xemgs;
+
+    return $md;
 }
 
 true;
