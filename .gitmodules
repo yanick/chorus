@@ -1,0 +1,6 @@
+[submodule "external/shjsx"]
+	path = external/shjsx
+	url = https://github.com/Munawwar/SHJS-Extended.git
+[submodule "external/slippy"]
+	path = external/slippy
+	url = https://github.com/Seldaek/slippy
