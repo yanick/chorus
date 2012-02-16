@@ -1,0 +1,139 @@
+pre.sh-sourceCode {
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-keyword {
+  color: #a52a2a;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-type {
+  color: #0000ff;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-string {
+  color: #ff00ff;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-regexp {
+  color: #ff00ff;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-specialchar {
+  color: #ff00ff;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-comment {
+  color: #ff0000;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-number {
+  color: #ff00ff;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-preproc {
+  color: #a020f0;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-function {
+  color: #000000;
+  font-weight: bold;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-url {
+  color: #ff00ff;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-date {
+  color: #a52a2a;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-time {
+  color: #a52a2a;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-file {
+  color: #a52a2a;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-ip {
+  color: #ff00ff;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-name {
+  color: #ff00ff;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-variable {
+  color: #225f2d;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-oldfile {
+  color: #ff00ff;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-newfile {
+  color: #ff00ff;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-difflines {
+  color: #a52a2a;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-selector {
+  color: #225f2d;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-property {
+  color: #a52a2a;
+  font-weight: normal;
+  font-style: normal;
+}
+
+pre.sh-sourceCode .sh-value {
+  color: #ff00ff;
+  font-weight: normal;
+  font-style: normal;
+}
+

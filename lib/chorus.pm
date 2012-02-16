@@ -47,7 +47,7 @@ sub groom_markdown {
     my $md = shift;
 
     $md =~ s#^(~~~+)\s*?(\S*)$ (.*?)^\1$ #
-        "<pre lang='$2'>" 
+        "<pre class='snippet sh-$2'>" 
       . encode_entities($3) 
       . '</pre>'#xemgs;
 
