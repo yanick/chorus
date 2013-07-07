@@ -1,0 +1,42 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.68.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 65db7cc7f2932b904efdfb5efef4e36fd3c6fba8 AUTHOR_PLEDGE
+SHA1 d64b442c1b0ea1c87b3c9489ac47940c67ea028b Build.PL
+SHA1 7a969284b994ff5f1ccc1c44df6e94a5dce41483 CONTRIBUTORS
+SHA1 90c895d3c4fa0c19570de99b756fb93784a4cfdb Changes
+SHA1 c5925e168e12904f3bc4936904c5dbd78f0d7192 INSTALL
+SHA1 cf5dc9c929415cfa7133eed863def866ade9774d LICENSE
+SHA1 f46103cf41d35cf62d43341781ce3ec1fd8ef8af MANIFEST
+SHA1 134c30c98d5643ee4f06389762bf50a29fa85945 MANIFEST.SKIP
+SHA1 8b17c7eed5f5161b75572dd3ec750a07ac9af515 META.json
+SHA1 23cdd1f0eddca8f6b2b5990d3073ab549dba3b01 META.yml
+SHA1 733c2a819276e9c07d8347b454f9ea8a52170775 README
+SHA1 3a945b30ec693b6cc0f31a3e8b3136a473efb3bc README.mkdn
+SHA1 f5b18a9d60c59010c01a844a45ac850a0417ac95 bin/chorus
+SHA1 6eaade6fad76ca005638d1ce8ba0600b2e068ecc examples/ex1.pl
+SHA1 f2cb44a6015eeb3d755a6aa729086d1c4f1484ea examples/root/hello.mason
+SHA1 d80567e7c310756a60dbd61b18d9fdc62be9193e lib/App/Chorus.pm
+SHA1 efe9a581b1767fa5ef681f19a9dbb320da59bcbf share/shared-files.tar.gz
+SHA1 6b5f4ff40df64c1d63a284d36bf898b667e1f827 t/000-report-versions-tiny.t
+SHA1 ec3f84bfd7a9ce3246e7592f4134100c6b5ce02b xt/release/unused-vars.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEARECAAYFAlHZw6kACgkQ34Hwf+GwC4zeIQCg9CjVTA2zs2DKsMIkIlf48KvM
+RaYAn0sKbhTLOloMMY+3pMOVWrrfd+Wm
+=N3YW
+-----END PGP SIGNATURE-----

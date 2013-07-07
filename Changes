@@ -1,5 +1,8 @@
 Revision history for App-Chorus
 
-{{$NEXT}}
+0.1.0 2013-07-07
  - First version, unleashed on an unsuspecting world.
+
+ [STATISTICS]
+ - code churn: 571 files changed, 12261 insertions(+), 30642 deletions(-)
 
