@@ -4,6 +4,8 @@
 use strict;
 use warnings;
 
+use lib 'lib';
+
 use 5.10.0;
 
 use File::ShareDir::Tarball;
@@ -16,6 +18,7 @@ BEGIN {
         'appdir=s'
     );
 
+    $::options{appdir} = './share';
     $::options{appdir} &&= path($::options{appdir})->absolute;
 
     $ENV{DANCER_APPDIR} = $::options{appdir} ||
@@ -27,15 +30,11 @@ BEGIN {
 use Dancer;
 
 BEGIN {
-    die "usage: $0 <slides.mkd>\n" unless @ARGV == 1;
-
-    my $prez = shift;
-
-    die "file '$prez' not found\n" unless -f $prez;
 
     set logger => 'console';
-    set log_level => 'debug';
-    set presentation => $prez;
+    set log => 'debug';
+    set presentation => './foo.mkd';
+    set serializer => 'JSON';
 }
 
 
@@ -43,11 +42,13 @@ use App::Chorus;
 
 use Plack::Loader;
 
-dance;
+#dance;
+#__END__
+#die "never";
 
-$ENV{PLACK_ENV} = 'Twiggy';
+$ENV{PLACK_ENV} = 'PSGI';
 
-Plack::Loader->load('Twiggy', port => 3000 )->run(
-    Dancer::Handler->psgi_app
-);
+Plack::Loader->load('Twiggy', port => 3000 )->run( dance );
+#    Dancer::Handler->psgi_app
+#);
 

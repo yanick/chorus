@@ -6,7 +6,7 @@ $aria => 0
 </%args>
 <html>
 <head>
-        <script type="text/javascript" src="/slippy/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="/jquery-2.0.2.min.js"></script>
         <script type="text/javascript" src="/slippy/jquery.history.js"></script>
         <script type="text/javascript" src="/slippy/slippy-0.9.0.js"></script>
 
@@ -72,29 +72,31 @@ $('.slide').slippy();
 
 % unless ( $aria ) {
 
+var choirmaster = false;
+
+$.get('/choirmaster').done(function(data){
+    console.log( data );
+    choirmaster = data.choirmaster;
+});
+
 var ws_path = "ws:<% $base_url %>_hippie/ws";
 var socket = new WebSocket( ws_path );
 
-var master;
 
 socket.onopen = function(){
     send_msg( "connected" );
 };
 
 socket.onmessage = function(e){
-    if ( master ) { return; }  // masters don't listen to ANYBODY!
+    if ( choirmaster ) { 
+        console.log( "Masters don't listen to ANYBODY!");
+        return; 
+    }
 
     var data = JSON.parse(e.data);
-    //alert( data.msg + " " + data.master);
+    console.log( data );
 
     $('#chorus_terminal .choirboy').show();
-
-    if ( data.master ) {
-        master = data.master;
-        $('#chorus_terminal .choirboy').hide();
-        $('#chorus_terminal .mc').show();
-        return;
-    }
 
     if ( data.slide != undefined ) {
         var s = data.slide+1;
@@ -113,13 +115,14 @@ function send_msg(message) {
 }
 
 $('.slide').bind('setSlide', function() {
-    if ( master ) {
-        socket.send(JSON.stringify({
-            "master": master,
-            "slide": $().slippy_current_slide_index()
-        }));
+    if( ! choirmaster ) {
+        return;
     }
-} );
+
+    socket.send(JSON.stringify({
+        "slide": $().slippy_current_slide_index()
+    }));
+});
 % }
 </script>
 

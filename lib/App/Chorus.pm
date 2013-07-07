@@ -4,13 +4,15 @@ package App::Chorus;
 use 5.10.0;
 
 use Dancer ':syntax';
-#use Dancer::Plugin::WebSocket;
+use Dancer::Plugin::WebSocket;
 
 use Text::Markdown qw/ markdown /;
 use HTML::Entities qw/ encode_entities /;
 use File::Slurp qw/ slurp /;
 
 our $presentation_file;
+
+our $choirmaster = JSON::true;
 
 get '/' => sub {
     template 'index' => { 
@@ -19,6 +21,20 @@ get '/' => sub {
         base_url => request->base->opaque,
         aria => params->{aria},
     };
+};
+
+get '/choirmaster' => sub {
+    my $data = { choirmaster => $choirmaster };
+
+    # first come grabs the pawah
+    $choirmaster = JSON::false;
+
+    return $data;
+};
+
+ws_on_new_listener sub {
+    debug "why, hello there";
+    ws_send '{"master":"plan"}';
 };
 
 sub presentation {
