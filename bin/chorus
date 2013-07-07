@@ -36,18 +36,12 @@ BEGIN {
     set logger => 'console';
     set log_level => 'debug';
     set presentation => $prez;
+    set serializer => 'JSON';
 }
 
-
 use App::Chorus;
-
 use Plack::Loader;
 
-dance;
+$ENV{PLACK_ENV} = 'PSGI';
 
-$ENV{PLACK_ENV} = 'Twiggy';
-
-Plack::Loader->load('Twiggy', port => 3000 )->run(
-    Dancer::Handler->psgi_app
-);
-
+Plack::Loader->load('Twiggy', port => 3000 )->run(dance);

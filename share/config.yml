@@ -2,5 +2,8 @@ logger: "file"
 appname: "chorus"
 template: 'mason'
 
-presentation: perl-for-sysadmins.mkd
 reload_presentation: 1
+
+plugins:
+    'Cache::CHI':
+        driver: FastMmap

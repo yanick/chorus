@@ -4,7 +4,9 @@ package App::Chorus;
 use 5.10.0;
 
 use Dancer ':syntax';
+
 use Dancer::Plugin::WebSocket;
+use Dancer::Plugin::Cache::CHI;
 
 use Text::Markdown qw/ markdown /;
 use HTML::Entities qw/ encode_entities /;
@@ -12,7 +14,8 @@ use File::Slurp qw/ slurp /;
 
 our $presentation_file;
 
-our $choirmaster = JSON::true;
+cache_set choirmaster => JSON::true;
+cache_set current_slide => 0;
 
 get '/' => sub {
     template 'index' => { 
@@ -24,17 +27,34 @@ get '/' => sub {
 };
 
 get '/choirmaster' => sub {
-    my $data = { choirmaster => $choirmaster };
+    my $data = { choirmaster => cache_get 'choirmaster' };
+
+    if( cache_get 'choirmaster' ) {
+        cache_set started_at => time;
+    }
 
     # first come grabs the pawah
-    $choirmaster = JSON::false;
+    cache_set choirmaster => JSON::false;
 
     return $data;
 };
 
-ws_on_new_listener sub {
-    debug "why, hello there";
-    ws_send '{"master":"plan"}';
+get '/status' => sub {
+    return {
+        current_slide => cache_get( 'current_slide' ),
+        started_at => cache_get( 'started_at' ),
+    };
+};
+
+ws_on_message sub {
+    my $data = shift;
+
+    if( defined $data->{slide} ) {
+        cache_set current_slide => $data->{slide};
+    }
+
+    # passthrough
+    return $data;
 };
 
 sub presentation {
