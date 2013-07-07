@@ -68,7 +68,7 @@ sub presentation {
 }
 
 sub load_presentation {
-    $presentation_file ||= config->{presentation};
+    $presentation_file ||= setting 'presentation';
     
     my $markdown = groom_markdown( scalar slurp $presentation_file );
 
@@ -90,3 +90,12 @@ sub groom_markdown {
 }
 
 true;
+
+__END__
+
+=HEAD1 DESCRIPTION
+
+L<Dancer> application module for C<chorus>. See C<chorus>'s manpage for
+details on how to use it.
+
+    
