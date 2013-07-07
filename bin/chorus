@@ -1,0 +1,48 @@
+#!/usr/bin/env perl
+#PODNAME: chorus
+
+use strict;
+use warnings;
+
+use 5.10.0;
+
+use File::ShareDir::Tarball;
+use Getopt::Long;
+use Path::Tiny;
+
+BEGIN {
+
+    GetOptions( \%::options, 
+        'appdir=s'
+    );
+
+    $::options{appdir} &&= path($::options{appdir})->absolute;
+
+    $ENV{DANCER_APPDIR} = $::options{appdir} ||
+        File::ShareDir::Tarball::dist_dir( 'App-Chorus' );
+
+    say "using appdir '$ENV{DANCER_APPDIR}'";
+}
+
+use Dancer;
+
+BEGIN {
+    die "usage: $0 <slides.mkd>\n" unless @ARGV == 1;
+
+    my $prez = shift;
+
+    die "file '$prez' not found\n" unless -f $prez;
+
+    set logger => 'console';
+    set presentation => $prez;
+}
+
+
+use App::Chorus;
+
+use Plack::Loader;
+
+Plack::Loader->load('Twiggy', port => 3000 )->run(
+    Dancer::Handler->psgi_app
+);
+

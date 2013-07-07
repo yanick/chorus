@@ -1,4 +1,5 @@
-package chorus;
+package App::Chorus;
+# ABSTRACT: Markdown-based slidedeck server app
 
 use 5.10.0;
 
@@ -8,8 +9,6 @@ use Dancer ':syntax';
 use Text::Markdown qw/ markdown /;
 use HTML::Entities qw/ encode_entities /;
 use File::Slurp qw/ slurp /;
-
-our $VERSION = '0.1';
 
 our $presentation_file;
 
