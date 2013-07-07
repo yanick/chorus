@@ -238,15 +238,9 @@ external/slippy/src/slippy-dark.css
 external/slippy/src/slippy-pure.css
 external/slippy/src/slippy.css
 external/slippy/src/slippy.js
-foo.mkd
 lib/App/Chorus.pm
-logs/deployment.log
-logs/development.log
 mason_secret_template_society.markdown
 prez
 share/shared-files.tar.gz
-t/00-compile.t
 t/000-report-versions-tiny.t
-t/001_base.t
-t/002_index_route.t
 xt/release/unused-vars.t

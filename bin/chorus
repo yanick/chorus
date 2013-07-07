@@ -1,5 +1,6 @@
 #!/usr/bin/env perl
 #PODNAME: chorus
+#ABSTRACT: turn markdown documents into web-based slidedecks
 
 =head1 SYNOPSIS
 
