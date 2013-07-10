@@ -4,6 +4,7 @@ Revision history for App-Chorus
  [API CHANGES]
 
  [BUG FIXES]
+ - jquery.history.js was missing. [GH#2, Frew Taylor]
 
  [DOCUMENTATION]
 
