@@ -46,6 +46,18 @@ get '/status' => sub {
     };
 };
 
+get '/**' => sub {
+    my $path = join '/', @{ (splat)[0] };
+
+    pass unless $App::Chorus::local_public;
+
+    $path = join '/', $App::Chorus::local_public, $path;
+
+    pass unless -f $path;
+
+    send_file $path, system_path => 1;
+};
+
 ws_on_message sub {
     my $data = shift;
 
@@ -81,7 +93,7 @@ sub load_presentation {
 sub groom_markdown {
     my $md = shift;
 
-    $md =~ s#^(~~~+)\s*?(\S*)$ (.*?)^\1$ #
+    $md =~ s#^(```+)\s*?(\S*)$ (.*?)^\1$ #
         "<pre class='snippet sh-$2'>" 
       . encode_entities($3) 
       . '</pre>'#xemgs;
