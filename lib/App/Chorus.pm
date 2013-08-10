@@ -1,4 +1,10 @@
 package App::Chorus;
+BEGIN {
+  $App::Chorus::AUTHORITY = 'cpan:YANICK';
+}
+{
+  $App::Chorus::VERSION = '0.2.0';
+}
 # ABSTRACT: Markdown-based slidedeck server app
 
 use 5.10.0;
@@ -105,9 +111,30 @@ true;
 
 __END__
 
+=pod
+
+=head1 NAME
+
+App::Chorus - Markdown-based slidedeck server app
+
+=head1 VERSION
+
+version 0.2.0
+
 =HEAD1 DESCRIPTION
 
 L<Dancer> application module for C<chorus>. See C<chorus>'s manpage for
 details on how to use it.
 
-    
+=head1 AUTHOR
+
+Yanick Champoux <yanick@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yanick Champoux.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
