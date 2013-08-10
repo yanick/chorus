@@ -15,6 +15,21 @@ web-based presentation.
 Note: the application is still in early alpha. See L<http://techblog.babyl.ca/entry/chorus> 
 for informations about the original incarnation of the application.
 
+=head1 COMMAND-LINE ARGUMENTS
+
+=head2 --port $port
+
+On which port the application will run. Defaults to I<3000>.
+
+=head2 --dev
+
+Launch the application as a Dancer standalone dev instance.
+
+=head2 --public $directory
+
+Directory where the public files (images, css, js, etc)
+are kept. Defaults to I<./public>.
+
 =cut
 
 use strict;
@@ -29,8 +44,16 @@ use Plack::Loader;
 
 require Dancer;
 
+%::options = (
+    port   => 3000,
+    public => './public',
+);
+
 GetOptions( \%::options, 
-    'appdir=s'
+    'appdir=s',
+    'port=i',
+    'dev!',
+    'public=s',
 );
 
 die "usage: $0 <slides.mkd>\n" unless @ARGV == 1;
@@ -47,6 +70,12 @@ say "using appdir '$ENV{DANCER_APPDIR}'";
 
 Dancer->import;
 
+Dancer::set( 'port' => $::options{port} );
+if ( my $public = $::options{public} ){
+    $public = Path::Tiny::path($public)->absolute;
+    $App::Chorus::local_public = $public;
+}
+
 Dancer::load_app( 'App::Chorus', settings => {
     logger => 'console',
     log_level => 'debug',
@@ -54,6 +83,8 @@ Dancer::load_app( 'App::Chorus', settings => {
     serializer => 'JSON',
 });
 
+Dancer::dance() if $::options{dev};
+
 $ENV{PLACK_ENV} = 'PSGI';
 
-Plack::Loader->load('Twiggy', port => 3000 )->run(Dancer::dance());
+Plack::Loader->load('Twiggy', port => $::options{port} )->run(Dancer::dance());
