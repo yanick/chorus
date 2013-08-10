@@ -9,6 +9,9 @@ Revision history for App-Chorus
  [DOCUMENTATION]
 
  [ENHANCEMENTS]
+ - add a few command-line arguments.
+ - can access a public dir for pictures
+ - change ~~~ for ``` for code blocks
 
  [NEW FEATURES]
 
