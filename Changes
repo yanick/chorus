@@ -4,18 +4,26 @@ Revision history for App-Chorus
  [API CHANGES]
 
  [BUG FIXES]
- - jquery.history.js was missing. [GH#2, Frew Taylor]
 
  [DOCUMENTATION]
+
+ [ENHANCEMENTS]
+
+ [NEW FEATURES]
+
+ [STATISTICS]
+
+0.2.0 2013-08-10
+ [BUG FIXES]
+ - jquery.history.js was missing. [GH#2, Frew Taylor]
 
  [ENHANCEMENTS]
  - add a few command-line arguments.
  - can access a public dir for pictures
  - change ~~~ for ``` for code blocks
 
- [NEW FEATURES]
-
  [STATISTICS]
+ - code churn: 4 files changed, 179 insertions(+), 3 deletions(-)
 
 0.1.0 2013-07-07
  - First version, unleashed on an unsuspecting world.
