@@ -4,7 +4,6 @@ Revision history for App-Chorus
  [API CHANGES]
 
  [BUG FIXES]
- - Add the Mason and Cache dependencies.
 
  [DOCUMENTATION]
 
@@ -13,6 +12,13 @@ Revision history for App-Chorus
  [NEW FEATURES]
 
  [STATISTICS]
+
+0.2.1 2013-10-06
+ [BUG FIXES]
+ - Add the Mason and Cache dependencies.
+
+ [STATISTICS]
+ - code churn: 2 files changed, 17 insertions(+), 3 deletions(-)
 
 0.2.0 2013-08-10
  [BUG FIXES]
