@@ -1,9 +1,0 @@
-logger: "file"
-appname: "chorus"
-template: 'mason'
-
-reload_presentation: 1
-
-plugins:
-    'Cache::CHI':
-        driver: FastMmap

@@ -2,35 +2,6 @@
 #PODNAME: chorus
 #ABSTRACT: turn markdown documents into web-based slidedecks
 
-=head1 SYNOPSIS
-
-    $ chorus presentation.markdown
-    <presentation is now accessible on the local machine on port 3000>
-
-=head1 DESCRIPTION
-
-C<chorus> takes a markdown document and turns it into a 
-web-based presentation.
-
-Note: the application is still in early alpha. See L<http://techblog.babyl.ca/entry/chorus> 
-for informations about the original incarnation of the application.
-
-=head1 COMMAND-LINE ARGUMENTS
-
-=head2 --port $port
-
-On which port the application will run. Defaults to I<3000>.
-
-=head2 --dev
-
-Launch the application as a Dancer standalone dev instance.
-
-=head2 --public $directory
-
-Directory where the public files (images, css, js, etc)
-are kept. Defaults to I<./public>.
-
-=cut
 
 use strict;
 use warnings;
@@ -88,3 +59,56 @@ Dancer::dance() if $::options{dev};
 $ENV{PLACK_ENV} = 'PSGI';
 
 Plack::Loader->load('Twiggy', port => $::options{port} )->run(Dancer::dance());
+
+__END__
+
+=pod
+
+=head1 NAME
+
+chorus - turn markdown documents into web-based slidedecks
+
+=head1 VERSION
+
+version 0.2.1
+
+=head1 SYNOPSIS
+
+    $ chorus presentation.markdown
+    <presentation is now accessible on the local machine on port 3000>
+
+=head1 DESCRIPTION
+
+C<chorus> takes a markdown document and turns it into a 
+web-based presentation.
+
+Note: the application is still in early alpha. See L<http://techblog.babyl.ca/entry/chorus> 
+for informations about the original incarnation of the application.
+
+=head1 COMMAND-LINE ARGUMENTS
+
+=head2 --port $port
+
+On which port the application will run. Defaults to I<3000>.
+
+=head2 --dev
+
+Launch the application as a Dancer standalone dev instance.
+
+=head2 --public $directory
+
+Directory where the public files (images, css, js, etc)
+are kept. Defaults to I<./public>.
+
+=head1 AUTHOR
+
+Yanick Champoux <yanick@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yanick Champoux.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
