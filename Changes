@@ -4,6 +4,7 @@ Revision history for App-Chorus
  [API CHANGES]
 
  [BUG FIXES]
+ - Add the Mason and Cache dependencies.
 
  [DOCUMENTATION]
 
