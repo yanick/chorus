@@ -134,14 +134,18 @@ sub load_presentation {
 
     });
 
-
-    $qs->find('li')->each(sub{
+    $qs->find('p')->each(sub{
             my(undef,$elem)=@_;
 
             if ( $elem->text =~ /^\s*\.{3}/ ) {
                 (my $text = $elem->text ) =~ s/^\s*\.{3}//;
                 $elem->text($text);
-                $elem->add_class('fragment');
+                if ( $elem->parent->get(0)->tag eq 'li' ) {
+                    $elem->parent->add_class('fragment');
+                }
+                else {
+                    $elem->add_class('fragment');
+                }
             }
 
     });
