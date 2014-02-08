@@ -10,7 +10,7 @@ use Dancer::Plugin::Cache::CHI;
 
 use Text::Markdown qw/ markdown /;
 use HTML::Entities qw/ encode_entities /;
-use File::Slurp qw/ slurp /;
+use Path::Tiny;
 
 our $presentation_file;
 
@@ -82,24 +82,85 @@ sub presentation {
 sub load_presentation {
     $presentation_file ||= setting 'presentation';
     
-    my $markdown = groom_markdown( scalar slurp $presentation_file );
+    my $markdown = groom_markdown( path($presentation_file)->slurp );
 
-    my $prez = "<div class='slide'>". markdown( $markdown ) . "</div>";
-    my $heads;
-    $prez =~ s#(?=<h1>)# $heads++ ? "</div><div class='slide'>" : "" #eg;
-    return $prez;
+    my $prez = markdown( $markdown );
+
+    use Web::Query;
+    my $q = Web::Query->new_from_html( "<body>$prez</body>" );
+
+    # move stuff in sections
+    my $qs = Web::Query->new_from_html( "<div class='slides'></div>" );
+    my $section;
+
+    $q->contents->each(sub{
+            my( $i, $elem ) = @_;
+
+            if ( $elem->get(0)->tag =~ /^h[12]$/ ) {
+                $qs->append( "<section />" );
+            }
+
+            $elem->detach;
+            $qs->find('section')->last->append($elem);
+    });
+
+    my $prev_section;
+    $qs->find('section')->each(sub{
+        my( $i, $elem ) = @_;
+
+        my $head = $elem->find('h1,h2')->first or return;
+
+        my $text = $head->text;
+
+        if ( $text =~ s/cont'd//i ) {
+                $DB::single = 1;
+                
+            if ( $prev_section->find('section')->size == 0 ) {
+                my $s = wq("<section />");
+                for ( $prev_section->contents ) {
+                    $_->detach;
+                    $s->append($_);
+                }
+                $prev_section->append($s);
+            }
+                
+            $head->text($text);
+            $elem->detach;
+            $prev_section->append($elem);
+        }
+        else {
+            $prev_section = $elem;
+        }
+
+    });
+
+
+    $qs->find('li')->each(sub{
+            my(undef,$elem)=@_;
+
+            if ( $elem->text =~ /^\s*\.{3}/ ) {
+                (my $text = $elem->text ) =~ s/^\s*\.{3}//;
+                $elem->text($text);
+                $elem->add_class('fragment');
+            }
+
+    });
+
+    return $qs->as_html;
 }
 
 sub groom_markdown {
     my $md = shift;
 
     $md =~ s#^(```+)\s*?(\S*)$ (.*?)^\1$ #
-        "<pre class='snippet sh-$2'>" 
+        "<pre><code class='$2'>" 
       . encode_entities($3) 
-      . '</pre>'#xemgs;
+      . '</code></pre>'#xemgs;
 
     return $md;
 }
+
+load_presentation();
 
 true;
 
