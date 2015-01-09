@@ -2,6 +2,8 @@ Revision history for App-Chorus
 
 {{$NEXT}}
  [API CHANGES]
+ - Switch to RevealJS, remove websocket (for now),
+    and generally rewrote the whole thing.
 
  [BUG FIXES]
 
