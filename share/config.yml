@@ -1,6 +1,0 @@
-logger: "console"
-appname: "chorus"
-template: simple
-
-reload_presentation: 1
-

@@ -1,19 +1,12 @@
 Revision history for App-Chorus
 
-{{$NEXT}}
+1.0.0 2015-01-09
  [API CHANGES]
- - Switch to RevealJS, remove websocket (for now),
-    and generally rewrote the whole thing.
-
- [BUG FIXES]
-
- [DOCUMENTATION]
-
- [ENHANCEMENTS]
-
- [NEW FEATURES]
+ - Switch to RevealJS, remove websocket (for now), and generally rewrote
+   the whole thing.
 
  [STATISTICS]
+ - code churn: 136 files changed, 16272 insertions(+), 4669 deletions(-)
 
 0.2.1 2013-10-06
  [BUG FIXES]
