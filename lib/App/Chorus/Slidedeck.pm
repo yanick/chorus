@@ -175,8 +175,13 @@ has html_body => (
         $_->html('');
     });
 
+    $qs->find('section')->first->each(sub{
+            $_->attr( 'class', $_->attr('class') . ' title_slide' );
+    });
+
     return $qs->as_html;
     },
+
 );
 
 sub groom_markdown {
@@ -226,6 +231,9 @@ append a C<^> to the C<#>s.
     ##^ follow-up slide
 
     # Back to top-level
+    
+Also, the first <section> tag will be given the class 'title_slide' (useful
+for css rules).
 
 =item Metadata
 
