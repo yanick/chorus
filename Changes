@@ -8,11 +8,17 @@ Revision history for App-Chorus
  [DOCUMENTATION]
 
  [ENHANCEMENTS]
- - add "title_slide" as a class of the first section.
 
  [NEW FEATURES]
 
  [STATISTICS]
+
+1.1.0 2015-01-13
+ [ENHANCEMENTS]
+ - add "title_slide" as a class of the first section.
+
+ [STATISTICS]
+ - code churn: 2 files changed, 17 insertions(+), 2 deletions(-)
 
 1.0.0 2015-01-09
  [API CHANGES]
