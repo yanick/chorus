@@ -1,6 +1,9 @@
 package App::Chorus::Slidedeck;
+BEGIN {
+  $App::Chorus::Slidedeck::AUTHORITY = 'cpan:YANICK';
+}
 #ABSTRACT: presentation document for Chorus
-
+$App::Chorus::Slidedeck::VERSION = '1.1.0';
 use 5.10.0;
 
 use strict;
@@ -213,6 +216,18 @@ sub groom_markdown {
 
 __END__
 
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+App::Chorus::Slidedeck - presentation document for Chorus
+
+=head1 VERSION
+
+version 1.1.0
+
 =head1 CHORUS ADDITIONAL MARKUP
 
 Chorus adds a few custom shorcuts in addition of the regular Markdown syntax.
@@ -231,7 +246,7 @@ append a C<^> to the C<#>s.
     ##^ follow-up slide
 
     # Back to top-level
-    
+
 Also, the first <section> tag will be given the class 'title_slide' (useful
 for css rules).
 
@@ -247,7 +262,6 @@ document.
 If not given, the title will default to the first header found in the
 document. Likewise, the default Revealjs theme is (surprise) 'default'.
 
-
 =item Speaker notes
 
     ~ will become 
@@ -259,7 +273,17 @@ document. Likewise, the default Revealjs theme is (surprise) 'default'.
     this
     ~~~
 
-
-
 =back
 
+=head1 AUTHOR
+
+Yanick Champoux <yanick@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Yanick Champoux.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
